@@ -1,0 +1,19 @@
+version: '3'
+services:
+  build:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+     - /home/nabeel/Docker-task3:/home/fatimah
+    working_dir: /home/fatimah
+    command: sh -c "rm -r build; mkdir build && cd build && cmake .. && make"
+
+
+  run:
+    image: docker-task3_build:latest
+    volumes:
+      - /home/nabeel/Docker-task3/build:/home/fatimah
+    working_dir: /home/fatimah/
+    network_mode: "host"
+    command: sh -c "./validate_time"
